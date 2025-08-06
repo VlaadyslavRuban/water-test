@@ -9,11 +9,11 @@ stages:
       size: 2179
     params:
       params.yaml:
-        data_collection.test_size: 0.1
+        data_collection.test_size: 0.6
     outs:
     - path: data/raw
       hash: md5
-      md5: 5d8d12cd733707142b7bb7363dd7f84d.dir
+      md5: f5a9a6cc130441b458246add330085e2.dir
       size: 518984
       nfiles: 2
   data_preprocessing:
@@ -21,7 +21,7 @@ stages:
     deps:
     - path: data/raw
       hash: md5
-      md5: 5d8d12cd733707142b7bb7363dd7f84d.dir
+      md5: f5a9a6cc130441b458246add330085e2.dir
       size: 518984
       nfiles: 2
     - path: src/data/data_prep.py
@@ -31,16 +31,16 @@ stages:
     outs:
     - path: data/processed
       hash: md5
-      md5: 32658067c01e7c08ed54ab8e3482159b.dir
-      size: 543107
+      md5: 2a95c30433c01479e8512029d5252661.dir
+      size: 543767
       nfiles: 2
   model_building:
     cmd: python src/model/model_building.py
     deps:
     - path: data/processed
       hash: md5
-      md5: 32658067c01e7c08ed54ab8e3482159b.dir
-      size: 543107
+      md5: 2a95c30433c01479e8512029d5252661.dir
+      size: 543767
       nfiles: 2
     - path: src/model/model_building.py
       hash: md5
@@ -48,19 +48,19 @@ stages:
       size: 2471
     params:
       params.yaml:
-        model_building.n_estimators: 100
+        model_building.n_estimators: 1000
     outs:
     - path: models/model.pkl
       hash: md5
-      md5: d1e5fcdbfa72faea5d54820b8cbd78e2
-      size: 8201745
+      md5: 7629f360b89bf843ef2ecd127f5df373
+      size: 38115886
   model_evaluation:
     cmd: python src/model/model_eval.py
     deps:
     - path: models/model.pkl
       hash: md5
-      md5: d1e5fcdbfa72faea5d54820b8cbd78e2
-      size: 8201745
+      md5: 7629f360b89bf843ef2ecd127f5df373
+      size: 38115886
     - path: src/model/model_eval.py
       hash: md5
       md5: 2456f59d979f0f5a912ccd1d2e0c67fc
@@ -68,5 +68,5 @@ stages:
     outs:
     - path: reports/metrics.json
       hash: md5
-      md5: fbbaa7a1010285126f7dd8a32335a22c
-      size: 141
+      md5: 8c429dbec55384a11b0ad7abed0a5666
+      size: 139
