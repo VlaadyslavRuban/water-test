@@ -1,0 +1,4 @@
+[core]
+    remote = myremote-dvc-folder
+['remote "myremote-dvc-folder"']
+    url = /tmp/dvc-demo-folder-test
